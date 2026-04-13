@@ -17,6 +17,7 @@ O sistema foi desenvolvido utilizando as seguintes tecnologias:
 
 ## Como rodar
 py -m uvicorn main:app --reload
+
 py -m streamlit run app.py
 
 
