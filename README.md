@@ -20,4 +20,4 @@ py -m uvicorn main:app --reload
 
 py -m streamlit run app.py
 
-
+Acrescente sua API key do gemini
