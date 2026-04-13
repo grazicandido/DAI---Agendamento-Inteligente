@@ -15,4 +15,8 @@ O sistema foi desenvolvido utilizando as seguintes tecnologias:
 
 •	Uvicorn: servidor ASGI para execução da aplicação
 
+## Como rodar
+py -m uvicorn main:app --reload
+py -m streamlit run app.py
+
 
