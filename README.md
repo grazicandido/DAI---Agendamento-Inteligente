@@ -53,10 +53,9 @@ py -m uvicorn main:app --reload
 
 Acrescente sua API key do gemini no arquivo main.py
 
-Salve o arquivo do excel 
+Salve o arquivo do excel que está na pasta "dados"
 
 ### Frontend
 
 py -m streamlit run app.py
-
-
+salve o arquivo de imagem que está em "assets"
