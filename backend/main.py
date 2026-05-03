@@ -3,11 +3,8 @@ from fastapi.middleware.cors import CORSMiddleware
 import google.generativeai as genai
 import pandas as pd
 
-genai.configure(api_key="AIzaSyA9LwuvJ1rdGYR-QyqLsfFFTjcL9h9tSu0")
+genai.configure(api_key="X")
 model = genai.GenerativeModel("models/gemini-flash-latest")
-
-# APP FASTAPI
-# =========================
 
 app = FastAPI(title="DAI - Agendamento Inteligente")
 
@@ -19,21 +16,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# =========================
-# CAMINHO DO EXCEL
-# =========================
-
 CAMINHO_EXCEL = "../dados/Agendamentos Exame e Consulta v1.xlsx"
 
-# =========================
-# MEMÓRIA TEMPORÁRIA
-# =========================
-
 agendamentos_confirmados = []
-
-# =========================
-# FUNÇÕES DE DADOS
-# =========================
 
 def carregar_base():
     return pd.read_excel(CAMINHO_EXCEL, sheet_name="Exportar Planilha")
@@ -74,10 +59,6 @@ def gerar_horarios_da_base(tipo_agenda=None):
 
     return horarios
 
-# =========================
-# IA
-# =========================
-
 def responder_com_gemini(mensagem: str):
     prompt = f"""
     Você é a DAI, assistente de agendamento médico.
@@ -97,14 +78,9 @@ def responder_com_gemini(mensagem: str):
     except Exception as erro:
         return f"Erro na IA: {erro}"
 
-# =========================
-# INTENÇÃO
-# =========================
-
 def identificar_intencao(mensagem: str):
     texto = mensagem.lower()
 
-    # 🔴 ENCERRAMENTO
     if any(p in texto for p in ["nenhum", "nenhuma", "não quero", "nao quero", "encerrar", "finalizar"]):
         return "encerrar"
 
@@ -124,10 +100,6 @@ def identificar_intencao(mensagem: str):
         return "consulta"
 
     return "duvida"
-
-# =========================
-# ROTAS
-# =========================
 
 @app.get("/")
 def home():
@@ -184,10 +156,6 @@ def chat(mensagem: str):
         "mensagem": resposta_ia
     }
 
-# =========================
-# CONFIRMAR
-# =========================
-
 @app.post("/confirmar")
 def confirmar_agendamento(id_horario: int):
     horarios = gerar_horarios_da_base()
@@ -210,17 +178,9 @@ def confirmar_agendamento(id_horario: int):
 
     return {"status": "erro"}
 
-# =========================
-# LISTAR
-# =========================
-
 @app.get("/meus-agendamentos")
 def listar():
     return {"agendamentos": agendamentos_confirmados}
-
-# =========================
-# CANCELAR
-# =========================
 
 @app.post("/cancelar")
 def cancelar(id_agendamento: int):
@@ -230,10 +190,6 @@ def cancelar(id_agendamento: int):
             return {"mensagem": "Cancelado com sucesso"}
 
     return {"erro": "não encontrado"}
-
-# =========================
-# REMARCAR
-# =========================
 
 @app.post("/remarcar")
 def remarcar(id_agendamento: int, novo_id: int):
