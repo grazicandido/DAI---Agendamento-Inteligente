@@ -58,4 +58,5 @@ Salve o arquivo do excel que está na pasta "dados"
 ### Frontend
 
 py -m streamlit run app.py
-salve o arquivo de imagem que está em "assets"
+
+Salve o arquivo de imagem que está em "assets"
