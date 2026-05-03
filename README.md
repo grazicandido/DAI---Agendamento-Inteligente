@@ -1,39 +1,62 @@
-# DAI: Agendamento Inteligente
-DAI é uma agente de IA desenvolvida para otimizar o processo de agendamento de consultas, atuando como assistente conversacional em tempo real. A solução simula um atendimento inteligente, reduzindo etapas manuais e facilitando a comunicação entre usuário e sistema.
+#  DAI – Agendamento Inteligente
 
-O projeto implementa um MVP que demonstra a aplicação prática de Inteligência Artificial combinada com backend em Python e processamento de linguagem natural. Também foi desenvolvido um front-end simples para simular a interação com o usuário.
+DAI é uma agente de Inteligência Artificial desenvolvido para otimizar o processo de agendamento de consultas médicas, atuando como uma assistente virtual conversacional em tempo real.
 
-O sistema funciona por meio de um fluxo conversacional: o usuário envia uma mensagem, que é processada pela API. Quando necessário, a IA interpreta a intenção e o sistema retorna uma resposta adequada ao contexto da conversa.
+A solução simula um atendimento inteligente, automatizando interações e facilitando a comunicação entre usuário e sistema de saúde.
 
-## Funcionalidades:
 
-Interpretação de mensagens do usuário;
+## Objetivo
 
-Fluxo de agendamento de consultas;
+Resolver o problema de agendamentos demorados e manuais, utilizando IA para:
 
-Identificação de intenção (agendar, cancelar, etc.);
+- Reduzir tempo de atendimento  
+- Melhorar a experiência do usuário  
+- Automatizar processos operacionais  
 
-Simulação de escolha de especialidade e horário;
+## Funcionalidades
 
-Respostas contextuais com IA.
+- Interpretação de mensagens em linguagem natural  
+- Identificação de intenção (consulta, exame, cancelamento, orientações)  
+- Sugestão de horários baseada em dados reais  
+- Confirmação de agendamento  
+- Cancelamento de consultas  
+- Respostas inteligentes com IA generativa  
 
-## O sistema foi desenvolvido utilizando as seguintes tecnologias:
+## Arquitetura
 
-•	Python: linguagem principal do projeto
+O sistema foi estruturado com separação entre frontend e backend:
 
-•	FastAPI: framework utilizado para construção da API backend
+- **Backend (FastAPI)**: responsável pela lógica de negócio e integração com IA  
+- **Frontend (Streamlit)**: interface conversacional para interação com o usuário  
+- **IA (Google Gemini)**: interpretação das mensagens e geração de respostas  
+- **Base de dados (Excel)**: utilizada para simular disponibilidade de agendas  
 
-•	Streamlit: utilizado para criação da interface simples de chat
+## Tecnologias utilizadas
 
-•	Google Gemini (IA Generativa): responsável por interpretar as mensagens do usuário
+- Python  
+- FastAPI  
+- Streamlit  
+- Google Gemini (IA Generativa)  
+- Pandas  
+- Uvicorn  
 
-•	Uvicorn: servidor ASGI para execução da aplicação
+## Diferenciais
 
-Este projeto foi desenvolvido como MVP para demonstrar a integração entre backend, IA generativa e fluxo conversacional estruturado.
+- Aplicação real de IA em um cenário de saúde  
+- Uso de dados estruturados (Excel) para simulação de agenda  
+- Arquitetura desacoplada (API + Interface)  
+- Fluxo completo ponta a ponta funcionando  
 
 ## Como rodar
+### Backend
 py -m uvicorn main:app --reload
+
+Acrescente sua API key do gemini no arquivo main.py
+
+Salve o arquivo do excel 
+
+### Frontend
 
 py -m streamlit run app.py
 
-Acrescente sua API key do gemini no arquivo main.py
+
