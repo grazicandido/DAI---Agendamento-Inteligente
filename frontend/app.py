@@ -10,10 +10,6 @@ st.set_page_config(
     layout="centered"
 )
 
-# =========================
-# CSS / VISUAL
-# =========================
-
 st.markdown("""
 <style>
 .stApp {
@@ -96,10 +92,6 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# =========================
-# SESSION STATE
-# =========================
-
 if "chat" not in st.session_state:
     st.session_state.chat = []
 
@@ -111,10 +103,6 @@ if "agendamento_confirmado" not in st.session_state:
 
 if "agendamentos" not in st.session_state:
     st.session_state.agendamentos = []
-
-# =========================
-# HEADER
-# =========================
 
 col_img, col_texto = st.columns([1, 5])
 
@@ -132,10 +120,6 @@ with col_texto:
     </div>
     """, unsafe_allow_html=True)
 
-# =========================
-# FUNÇÃO AUXILIAR
-# =========================
-
 def enviar_mensagem_padrao(texto_usuario):
     resposta = requests.post(
         f"{API_URL}/chat",
@@ -150,10 +134,6 @@ def enviar_mensagem_padrao(texto_usuario):
 
     if resposta.get("agendamentos"):
         st.session_state.agendamentos = resposta.get("agendamentos", [])
-
-# =========================
-# CARDS DE SERVIÇOS
-# =========================
 
 st.markdown('<div class="section-title">O que você precisa hoje?</div>', unsafe_allow_html=True)
 
@@ -212,10 +192,6 @@ with col4:
         ))
         st.session_state.horarios = []
 
-# =========================
-# CHAT
-# =========================
-
 st.markdown('<div class="section-title">Converse com a DAI</div>', unsafe_allow_html=True)
 
 mensagem = st.text_input(
@@ -260,19 +236,11 @@ if enviar and mensagem.strip():
     except Exception as erro:
         st.error(f"Erro ao conectar com o backend: {erro}")
 
-# =========================
-# HISTÓRICO DO CHAT
-# =========================
-
 for autor, texto in st.session_state.chat:
     if autor == "Você":
         st.markdown(f'<div class="chat-user"><b>Você:</b><br>{texto}</div>', unsafe_allow_html=True)
     else:
         st.markdown(f'<div class="chat-bot"><b>DAI:</b><br>{texto}</div>', unsafe_allow_html=True)
-
-# =========================
-# HORÁRIOS SUGERIDOS
-# =========================
 
 if st.session_state.horarios:
     st.markdown('<div class="section-title">Horários sugeridos</div>', unsafe_allow_html=True)
@@ -305,10 +273,6 @@ if st.session_state.horarios:
             except Exception as erro:
                 st.error(f"Erro ao confirmar agendamento: {erro}")
 
-# =========================
-# AGENDAMENTO CONFIRMADO
-# =========================
-
 if st.session_state.agendamento_confirmado:
     st.markdown('<div class="section-title">Agendamento confirmado</div>', unsafe_allow_html=True)
 
@@ -325,10 +289,6 @@ if st.session_state.agendamento_confirmado:
         <p><b>Data:</b> {dados.get("data_sugerida", "-")} &nbsp; | &nbsp; <b>Hora:</b> {dados.get("hora_sugerida", "-")}</p>
     </div>
     """, unsafe_allow_html=True)
-
-# =========================
-# MEUS AGENDAMENTOS
-# =========================
 
 st.markdown('<div class="section-title">Meus agendamentos</div>', unsafe_allow_html=True)
 
